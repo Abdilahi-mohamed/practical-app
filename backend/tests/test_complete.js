@@ -16,6 +16,7 @@ function createTestUser(prefix = 'test') {
         password: 'password123'
     };
 }
+
 // ═══════════════════════════════════════════════════════
 // TEST 1: User Registration
 // ═══════════════════════════════════════════════════════
