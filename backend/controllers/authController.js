@@ -6,7 +6,7 @@ exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        // Validate input
+        // Validate inputs
         if (!username || !email || !password) {
             return res.status(400).json({ error: 'Please provide all required fields' });
         }
@@ -25,6 +25,7 @@ exports.register = async (req, res) => {
             unlockedPersonalities: ['nerdy-tutor', 'health-coach', 'mood-support', 'travel-buddy'] // Free personalities
         });
 
+
         await user.save();
 
         // Generate JWT token
@@ -33,6 +34,7 @@ exports.register = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '30d' }
         );
+
 
         res.status(201).json({
             message: 'User registered successfully',
@@ -72,12 +74,14 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
+
         // Generate JWT token
         const token = jwt.sign(
             { userId: user._id },
             process.env.JWT_SECRET,
             { expiresIn: '30d' }
         );
+
 
         res.json({
             message: 'Login successful',
@@ -89,6 +93,7 @@ exports.login = async (req, res) => {
                 unlockedPersonalities: user.unlockedPersonalities
             }
         });
+
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({ error: 'Server error during login' });
