@@ -6,6 +6,7 @@ const chatController = require('../controllers/chatController');
 // Get chat history for a personality
 router.get('/history/:personalityId', authMiddleware, chatController.getHistory);
 
+
 // Send message and get AI response
 router.post('/message', authMiddleware, chatController.sendMessage);
 
